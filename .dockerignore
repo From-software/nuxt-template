@@ -21,3 +21,4 @@ coverage
 .eslintcache
 .stylelintcache
 Dockerfile
+docker-compose.yml
