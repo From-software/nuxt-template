@@ -1,0 +1,33 @@
+volumes:
+  pg_data:
+
+services:
+  nuxt:
+    image: node:24-alpine
+    restart: unless-stopped
+    working_dir: /app
+    volumes:
+      - .:/app
+    command: sh -c "npm install --include=dev && npm run dev"
+    ports:
+      - 3000:3000
+    environment:
+      TZ: Europe/Copenhagen
+      POSTGRES_HOST: ${POSTGRES_HOST:-postgres}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:18-alpine
+    restart: unless-stopped
+    shm_size: 128mb
+    volumes:
+      - pg_data:/var/lib/postgresql
+    environment:
+      TZ: Europe/Copenhagen
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+    healthcheck:
+      test: ["CMD", "pg_isready -U ${POSTGRES_USER:-postgres}"]
