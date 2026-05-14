@@ -1,1 +1,2 @@
-npm run qa
+npx lint-staged
+npm run typecheck
