@@ -34,3 +34,7 @@ This repository uses two GitHub Workflows:
 This project uses Eslint and Stylistic to enforce lint and style errors.
 
 To run it use the `lint` npm script to validate or `lint:fix` to automatically fix eslint and stylistic errors.
+
+## Dependabot
+
+Dependabot is enabled in the GitHub repository. Dependabot automatically scans dependencies for security vulnerabilities and updates to dependencies and creates pull requests.
