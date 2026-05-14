@@ -13,9 +13,9 @@ services:
       - 3000:3000
     environment:
       TZ: Europe/Copenhagen
-      POSTGRES_HOST: ${POSTGRES_HOST:-postgres}
-      POSTGRES_USER: ${POSTGRES_USER:-postgres}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_HOST: ${POSTGRES_HOST}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     depends_on:
       - postgres
 
@@ -27,7 +27,7 @@ services:
       - pg_data:/var/lib/postgresql
     environment:
       TZ: Europe/Copenhagen
-      POSTGRES_USER: ${POSTGRES_USER:-postgres}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     healthcheck:
-      test: ["CMD", "pg_isready -U ${POSTGRES_USER:-postgres}"]
+      test: ["CMD", "pg_isready -U ${POSTGRES_USER}"]
