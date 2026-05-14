@@ -14,7 +14,9 @@ To use this template, fork the repository. This means that commits in forks can 
 
 ## Development
 
-Clone the repository and run `npm install`. Then run `npm run dev` to start the dev server.
+Clone the repository and run `npm install`. This will prepare Nuxt and also install Husky git hooks.
+
+Then run `npm run dev` to start the dev server.
 
 ### Prerequisites
 
