@@ -16,11 +16,12 @@ To use this template, fork the repository. This means that commits in forks can 
 
 Clone the repository and run `npm install`. This will prepare Nuxt and also install Husky git hooks.
 
-Then run `npm run dev` to start the dev server.
+Then use Docker to start the Nuxt dev server and Postgres server: `docker compose up --detach`.
 
 ### Prerequisites
 
 - Node 24 & npm
+- Docker
 
 ## Code style
 
