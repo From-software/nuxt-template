@@ -1,75 +1,20 @@
-# Nuxt Minimal Starter
+# Nuxt template
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+This is a Nuxt template to hit the ground running while building new apps.
 
-## Setup
+## Stack
 
-Make sure to install dependencies:
+- Nuxt 4, Vue 3 & Typecsript
+- Node, Docker & K3s
 
-```bash
-# npm
-npm install
+## Usage
 
-# pnpm
-pnpm install
+To use this template, fork the repository. This means that commits in forks can be pushed back to this template repository.
 
-# yarn
-yarn install
+## Development
 
-# bun
-bun install
-```
+Clone the repository and run `npm install`. Then run `npm run dev` to start the dev server.
 
-## Development Server
+### Prerequisites
 
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+- Node 24 & npm
