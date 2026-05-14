@@ -4,5 +4,18 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   typescript: {
     strict: true
+  },
+  modules: [
+    '@nuxt/eslint'
+  ],
+  eslint: {
+    config: {
+      stylistic: {
+        quotes: 'single',
+        indent: 4,
+        commaDangle: 'never',
+        semi: false
+      }
+    }
   }
 })
