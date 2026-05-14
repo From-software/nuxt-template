@@ -18,6 +18,12 @@ Clone the repository and run `npm install`. This will prepare Nuxt and also inst
 
 Then use Docker to start the Nuxt dev server and Postgres server: `docker compose up --detach`.
 
+### Github Workflows
+
+This repository uses two GitHub Workflows:
+- CI: Runs typecheck and linting on pull requests to main to make sure the PR does not introduce any errors
+- Build: Builds and pushes a new Docker image to ghcr.io on pushes to the main branch.
+
 ### Prerequisites
 
 - Node 24 & npm
