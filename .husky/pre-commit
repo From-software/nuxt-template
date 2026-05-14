@@ -1,0 +1,8 @@
+npx lint-staged
+
+if git diff --cached --name-only \
+  | grep -qE '\.(ts|vue)$|^package(-lock)?\.json$|^tsconfig\.json$'; then
+  npm run typecheck
+else
+  echo "pre-commit: no type-relevant files staged, skipping typecheck"
+fi
