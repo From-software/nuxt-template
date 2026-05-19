@@ -1,0 +1,111 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: nuxt-template
+
+---
+
+# Secret setup — run these commands before applying the rest of the manifest.
+# Do NOT commit real values to git.
+#
+# 1. GHCR pull secret (needed to pull images from ghcr.io):
+#    kubectl -n nuxt-template create secret docker-registry ghcr-pull-secret \
+#      --docker-server=ghcr.io \
+#      --docker-username=<github-username> \
+#      --docker-password=<github-pat>
+#
+# 2. App secrets:
+#    kubectl -n nuxt-template create secret generic app-secrets \
+#      --from-literal=TZ=Europe/Copenhagen \
+#      --from-literal=POSTGRES_HOST=<host> \
+#      --from-literal=POSTGRES_USER=<user> \
+#      --from-literal=POSTGRES_PASSWORD=<password>
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nuxt-template
+  namespace: nuxt-template
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nuxt-template
+  template:
+    metadata:
+      labels:
+        app: nuxt-template
+    spec:
+      imagePullSecrets:
+        - name: ghcr-pull-secret
+      containers:
+        - name: nuxt-template
+          image: ghcr.io/from-software/nuxt-template:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+          envFrom:
+            - secretRef:
+                name: app-secrets
+          livenessProbe:
+            httpGet:
+              path: /api/health
+              port: 3000
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /api/health
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: nuxt-template
+  namespace: nuxt-template
+spec:
+  type: ClusterIP
+  selector:
+    app: nuxt-template
+  ports:
+    - port: 80
+      targetPort: 3000
+
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nuxt-template
+  namespace: nuxt-template
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  rules:
+    - host: app.example.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: nuxt-template
+                port:
+                  number: 80
+  tls:
+    - hosts:
+        - app.example.com
+      secretName: nuxt-template-tls
