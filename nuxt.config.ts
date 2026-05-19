@@ -1,9 +1,13 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
+import { fileURLToPath } from 'node:url'
+
 export default defineNuxtConfig({
     modules: [
         '@nuxt/eslint'
     ],
     devtools: { enabled: true },
+    alias: {
+        '#db': fileURLToPath(new URL('./db', import.meta.url))
+    },
     compatibilityDate: '2025-07-15',
     typescript: {
         strict: true
