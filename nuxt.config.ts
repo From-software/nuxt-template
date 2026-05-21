@@ -1,7 +1,10 @@
 import { fileURLToPath } from 'node:url'
 
 export default defineNuxtConfig({
-    modules: ['@nuxt/eslint', 'nuxt-security'],
+    modules: [
+        '@nuxt/eslint',
+        'nuxt-security'
+    ],
     devtools: { enabled: true },
     alias: {
         '#db': fileURLToPath(new URL('./db', import.meta.url))
