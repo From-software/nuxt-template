@@ -114,6 +114,18 @@ This works because the Deployment uses `imagePullPolicy: Always`.
 - **Health probes** — liveness and readiness probes hit `GET /api/health`. This endpoint does not exist yet (tracked in issue #10). Until it is added, pods will fail readiness checks; comment out the probes in `k8s.yaml` if you need to deploy before that issue lands.
 - **Encrypted secrets in git** — if you want to commit secrets safely, consider [Sealed Secrets](https://github.com/bitnami-labs/sealed-secrets) or [SOPS](https://github.com/getsops/sops). The current `k8s.yaml` intentionally omits Secret resources; they are created out-of-band via `kubectl`.
 
+## Environment variables
+
+This project uses [Varlock](https://varlock.dev) to validate environment variables at runtime before the server starts.
+
+`.env.schema` is committed to git and serves as the single source of truth — it defines every env var, its type, and validation rules without exposing secret values. The actual `.env` file is gitignored.
+
+To add a new env var:
+
+1. Add it to `.env.schema` with the appropriate annotations (`@required`, `@sensitive`, `@type`, etc.)
+2. Reference it in code via `process.env` or the relevant configuration
+3. Add the value to your local `.env`
+
 ## Code style
 
 This project uses Eslint and Stylistic to enforce lint and style errors.
