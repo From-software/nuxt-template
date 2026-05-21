@@ -1,4 +1,5 @@
 import { defineConfig } from 'drizzle-kit'
+import { getConnectionString } from './db/connection'
 
 export default defineConfig({
     dialect: 'postgresql',
@@ -6,10 +7,6 @@ export default defineConfig({
     schema: 'db/schema/index.ts',
     out: 'db/migrations/',
     dbCredentials: {
-        host: process.env.POSTGRES_HOST,
-        port: Number(process.env.POSTGRES_PORT),
-        user: process.env.POSTGRES_USER,
-        password: process.env.POSTGRES_PASSWORD,
-        database: process.env.POSTGRES_DATABASE
+        url: getConnectionString()
     }
 })

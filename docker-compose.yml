@@ -10,7 +10,7 @@ services:
       - .:/app
     command: sh -c "npm install --include=dev && npm run dev -- --host 0.0.0.0"
     ports:
-      - 3000:3000
+      - ${PORT:-3000}:3000
     environment:
       TZ: Europe/Copenhagen
       POSTGRES_HOST: ${POSTGRES_HOST}
@@ -25,6 +25,8 @@ services:
   postgres:
     image: postgres:18-alpine
     restart: unless-stopped
+    ports:
+      - 5432:5432
     shm_size: 128mb
     volumes:
       - pg_data:/var/lib/postgresql
