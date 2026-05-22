@@ -16,8 +16,8 @@ export default defineEventHandler(async (event) => {
 
     if (!user || !await verifyPassword(user.password, password)) {
         throw createError({
-            statusCode: 403,
-            statusMessage: 'Forbidden',
+            statusCode: 401,
+            statusMessage: 'Unauthorized',
             message: 'Invalid credentials'
         })
     }
