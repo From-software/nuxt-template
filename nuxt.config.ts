@@ -2,7 +2,8 @@ import { fileURLToPath } from 'node:url'
 
 export default defineNuxtConfig({
     modules: [
-        '@nuxt/eslint'
+        '@nuxt/eslint',
+        'nuxt-security'
     ],
     devtools: { enabled: true },
     alias: {
@@ -21,5 +22,9 @@ export default defineNuxtConfig({
                 semi: false
             }
         }
+    },
+    security: {
+        strict: true,
+        corsHandler: false
     }
 })
