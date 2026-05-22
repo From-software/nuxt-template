@@ -111,7 +111,6 @@ This works because the Deployment uses `imagePullPolicy: Always`.
 
 ### Notes
 
-- **Health probes** — liveness and readiness probes hit `GET /api/health`. This endpoint does not exist yet (tracked in issue #10). Until it is added, pods will fail readiness checks; comment out the probes in `k8s.yaml` if you need to deploy before that issue lands.
 - **Encrypted secrets in git** — if you want to commit secrets safely, consider [Sealed Secrets](https://github.com/bitnami-labs/sealed-secrets) or [SOPS](https://github.com/getsops/sops). The current `k8s.yaml` intentionally omits Secret resources; they are created out-of-band via `kubectl`.
 
 ## Environment variables
@@ -131,6 +130,33 @@ To add a new env var:
 This project uses Eslint and Stylistic to enforce lint and style errors.
 
 To run it use the `lint` npm script to validate or `lint:fix` to automatically fix eslint and stylistic errors.
+
+## Security
+
+HTTP security headers are enforced by `nuxt-security` with `strict: true` — this sets a restrictive CSP, HSTS, X-Frame-Options, and other headers. CORS is disabled (`corsHandler: false`).
+
+To relax headers for a specific route (e.g., to allow an inline script), use `defineRouteRules`:
+
+```ts
+defineRouteRules({
+  '/some-route': {
+    security: {
+      contentSecurityPolicy: {
+        'script-src': ["'self'", "'unsafe-inline'"]
+      }
+    }
+  }
+})
+```
+
+### Health endpoint
+
+`GET /api/health` returns `{ status: 'OK', timestamp: <epoch> }` with a 200. It is used by:
+
+- **K3s probes** — liveness (30s delay, 10s interval) and readiness (5s delay, 5s interval) in `k8s.yaml`
+- **Docker HEALTHCHECK** — the `Dockerfile` checks via `wget -qO- http://localhost:3000/api/health` every 15s
+
+The endpoint is intentionally lightweight and unauthenticated so health checks don't interfere with normal traffic.
 
 ## Dependabot
 
