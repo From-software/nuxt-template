@@ -22,5 +22,9 @@ export default defineNuxtConfig({
                 semi: false
             }
         }
+    },
+    security: {
+        strict: true,
+        corsHandler: false
     }
 })
