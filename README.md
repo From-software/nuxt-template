@@ -22,6 +22,20 @@ This template uses [nuxt-auth-utils](https://github.com/atinux/nuxt-auth-utils) 
 |--------|------|
 | `POST` | `/api/auth/login` |
 
+## Authorization
+
+This template uses [nuxt-authorization](https://nuxt.com/modules/authorization) for session-based authorization.
+Use abilities to define authorization policies which can be used in server API routes to enforce authentication and authorization rules.
+
+Abilities are defined in `shared/utils/abilities.ts` and be used like this:
+
+```typescript
+// server/api/users/index.get.ts
+export default defineEventHandler(async (event) => {
+    await authorize(event, listUsers)
+})
+```
+
 ## Database
 
 This template uses [Drizzle ORM](https://orm.drizzle.team) with PostgreSQL.
