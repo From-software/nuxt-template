@@ -10,7 +10,7 @@ services:
       - .:/app
     command: sh -c "npm install --include=dev && npm run dev -- --host 0.0.0.0"
     ports:
-      - ${PORT:-3000}:3000
+      - ${PORT:-3000}:${PORT:-3000}
     environment:
       TZ: Europe/Copenhagen
       POSTGRES_HOST: ${POSTGRES_HOST}
