@@ -109,9 +109,7 @@ kubectl -n nuxt-template rollout restart deployment/nuxt-template
 
 This works because the Deployment uses `imagePullPolicy: Always`.
 
-### Notes
 
-- **Encrypted secrets in git** — if you want to commit secrets safely, consider [Sealed Secrets](https://github.com/bitnami-labs/sealed-secrets) or [SOPS](https://github.com/getsops/sops). The current `k8s.yaml` intentionally omits Secret resources; they are created out-of-band via `kubectl`.
 
 ## Environment variables
 
