@@ -3,7 +3,8 @@ import { fileURLToPath } from 'node:url'
 export default defineNuxtConfig({
     modules: [
         '@nuxt/eslint',
-        'nuxt-security'
+        'nuxt-security',
+        'nuxt-auth-utils'
     ],
     devtools: { enabled: true },
     alias: {
