@@ -147,6 +147,12 @@ To add a new env var:
 2. Reference it in code via `process.env` or the relevant configuration
 3. Add the value to your local `.env`
 
+## Testing
+
+This template uses [Vitest](https://vitest.dev) for unit tests and [Playwright](https://playwright.dev) for E2E tests.
+
+Unit tests live in `tests/unit/` and run with `npm run test`.
+
 ## Code style
 
 This project uses Eslint and Stylistic to enforce lint and style errors.
