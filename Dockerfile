@@ -16,4 +16,5 @@ COPY --from=builder /build/.output ./.output
 COPY --from=builder /build/.env.schema ./.env.schema
 LABEL "org.opencontainers.image.source"="https://github.com/From-software/nuxt-template"
 HEALTHCHECK --start-period=5s --start-interval=5s --interval=15s --timeout=3s CMD wget -qO- http://localhost:${PORT:-3000}/api/health
+EXPOSE 3000
 CMD ["varlock", "run", "--", "node", ".output/server/index.mjs"]
