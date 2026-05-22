@@ -10,13 +10,14 @@
     "prepare": "husky",
     "dev": "nuxt dev",
     "build": "nuxt build",
-    "qa": "concurrently --names 'typecheck','lint' 'npm run typecheck' 'npm run lint'",
+    "qa": "concurrently --names 'typecheck','lint','test' 'npm run typecheck' 'npm run lint' 'npm run test'",
     "typecheck": "nuxt typecheck",
     "db:push": "drizzle-kit push",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "test": "vitest run"
   },
   "lint-staged": {
     "*.{ts,vue}": "eslint --fix"
@@ -35,13 +36,18 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
+    "@nuxt/test-utils": "^4.0.3",
     "@types/node": "^25.9.1",
     "@types/pg": "^8.20.0",
+    "@vue/test-utils": "^2.4.10",
     "concurrently": "^9.2.1",
     "drizzle-kit": "^0.31.10",
+    "happy-dom": "^20.9.0",
     "husky": "^9.1.7",
     "lint-staged": "^17.0.5",
+    "playwright-core": "^1.60.0",
     "typescript": "^6.0.3",
+    "vitest": "^4.1.7",
     "vue-tsc": "^3.3.1"
   }
 }

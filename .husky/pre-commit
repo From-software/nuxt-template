@@ -4,6 +4,8 @@ if git diff --cached --name-only \
   | grep -qE '\.(ts|vue)$|^package(-lock)?\.json$|^tsconfig\.json$'; then
   npm run typecheck 2>/dev/null \
     || docker compose run --rm nuxt npm run typecheck
+  npm run test 2>/dev/null \
+    || docker compose run --rm nuxt npm run test
 else
-  echo "pre-commit: no type-relevant files staged, skipping typecheck"
+  echo "pre-commit: no type-relevant files staged, skipping typecheck and tests"
 fi
