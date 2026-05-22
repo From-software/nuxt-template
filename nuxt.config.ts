@@ -4,7 +4,8 @@ export default defineNuxtConfig({
     modules: [
         '@nuxt/eslint',
         'nuxt-security',
-        'nuxt-auth-utils'
+        'nuxt-auth-utils',
+        'nuxt-authorization'
     ],
     devtools: { enabled: true },
     runtimeConfig: {
