@@ -7,6 +7,12 @@ export default defineNuxtConfig({
         'nuxt-auth-utils'
     ],
     devtools: { enabled: true },
+    runtimeConfig: {
+        session: {
+            password: '', // NUXT_SESSION_PASSWORD
+            maxAge: 60 * 60 * 24 * 7 // 7 days
+        }
+    },
     alias: {
         '#db': fileURLToPath(new URL('./db', import.meta.url))
     },
