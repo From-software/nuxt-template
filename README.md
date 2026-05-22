@@ -12,6 +12,16 @@ This is a Nuxt template to hit the ground running while building new apps.
 
 To use this template, fork the repository. This means that commits in forks can be pushed back to this template repository.
 
+## Authentication
+
+This template uses [nuxt-auth-utils](https://github.com/atinux/nuxt-auth-utils) for session-based authentication. Sessions are stored in an encrypted, `HttpOnly` cookie (`nuxt-session`) with a 7-day expiry.
+
+### Endpoints
+
+| Method | Path |
+|--------|------|
+| `POST` | `/api/auth/login` |
+
 ## Database
 
 This template uses [Drizzle ORM](https://orm.drizzle.team) with PostgreSQL.
