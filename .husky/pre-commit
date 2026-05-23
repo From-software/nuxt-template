@@ -1,11 +1,6 @@
-npx lint-staged
+docker compose run --rm --no-deps nuxt sh -e -c "
+  npm run lint
+  npm run typecheck
+  npm run test
+"
 
-if git diff --cached --name-only \
-  | grep -qE '\.(ts|vue)$|^package(-lock)?\.json$|^tsconfig\.json$'; then
-  npm run typecheck 2>/dev/null \
-    || docker compose run --rm nuxt npm run typecheck
-  npm run test 2>/dev/null \
-    || docker compose run --rm nuxt npm run test
-else
-  echo "pre-commit: no type-relevant files staged, skipping typecheck and tests"
-fi
