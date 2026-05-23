@@ -1,5 +1,5 @@
 docker compose run --rm --no-deps nuxt sh -e -c "
-  npm run lint
+  npm run lint:fix
   npm run typecheck
   npm run test
 "
