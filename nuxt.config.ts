@@ -33,7 +33,7 @@ export default defineNuxtConfig({
         }
     },
     security: {
-        strict: true,
+        strict: process.env.NODE_ENV !== 'development',
         corsHandler: false
     }
 })
